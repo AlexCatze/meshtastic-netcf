@@ -17,9 +17,15 @@ namespace MeshtasticNETCF
 
             var packet = fromRadio.Packet;
 
-            if (typeof(TResult) == typeof(Telemetry) && fromRadio.Packet.Decoded.Portnum == PortNum.TELEMETRY_APP)
+            if (
+                (typeof(TResult) == typeof(Telemetry) && fromRadio.Packet.Decoded.Portnum == PortNum.TELEMETRY_APP) ||
+                (typeof(TResult) == typeof(NodeInfo) && fromRadio.Packet.Decoded.Portnum == PortNum.NODEINFO_APP) ||
+                (typeof(TResult) == typeof(Waypoint) && fromRadio.Packet.Decoded.Portnum == PortNum.WaypointApp) ||
+                (typeof(TResult) == typeof(string) && fromRadio.Packet.Decoded.Portnum == PortNum.TextMessageApp)
+             )
                 using (var stream = new MemoryStream(fromRadio.Packet.Decoded.Payload))
                     return Serializer.Deserialize<TResult>(stream);
+
 
             /*
              
