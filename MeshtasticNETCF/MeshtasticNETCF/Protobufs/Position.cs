@@ -45,7 +45,7 @@ namespace MeshtasticNETCF.Protobufs
         [ProtoMember(12)]
         public uint HDOP { get; set; }
 
-        [ProtoMember(3)]
+        [ProtoMember(13)]
         public uint VDOP { get; set; }
 
         [ProtoMember(14)]

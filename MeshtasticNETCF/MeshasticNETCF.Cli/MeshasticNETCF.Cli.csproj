@@ -4,18 +4,18 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8E726375-870F-4006-B51E-90BC7B5A94D9}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{29DF4206-3916-456C-873D-15BE8E950D8B}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MeshtasticNETCF</RootNamespace>
-    <AssemblyName>MeshtasticNETCF</AssemblyName>
+    <RootNamespace>MeshasticNETCF.Cli</RootNamespace>
+    <AssemblyName>MeshasticNETCF.Cli</AssemblyName>
     <ProjectTypeGuids>{4D628B5B-2FBC-4AA6-8C16-197242AEB884};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PlatformFamilyName>PocketPC</PlatformFamilyName>
-    <PlatformID>4118C335-430C-497f-BE48-11C3316B135E</PlatformID>
-    <OSVersion>5.1</OSVersion>
-    <DeployDirSuffix>MeshtasticNETCF</DeployDirSuffix>
+    <PlatformID>b2c48bd2-963d-4549-9169-1fa021dce484</PlatformID>
+    <OSVersion>5.2</OSVersion>
+    <DeployDirSuffix>MeshasticNETCF.Cli</DeployDirSuffix>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <NativePlatformName>Windows Mobile 5.0 Pocket PC SDK</NativePlatformName>
+    <NativePlatformName>Windows Mobile 6 Professional SDK</NativePlatformName>
     <FormFactorID>
     </FormFactorID>
   </PropertyGroup>
@@ -46,7 +46,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
-    <Reference Include="protobuf-net, Version=2.0.0.668, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -55,39 +54,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connections\MeshtasticConnection.cs" />
-    <Compile Include="Connections\NativeSerialConnection.cs" />
-    <Compile Include="DeviceStateContainer.cs" />
-    <Compile Include="Enums\FirmwareEdition.cs" />
-    <Compile Include="Enums\HardwareModel.cs" />
-    <Compile Include="Enums\Portnum.cs" />
-    <Compile Include="Enums\Role.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="MessageFactory.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Protobufs\Channel.cs" />
-    <Compile Include="Protobufs\ClientNotification.cs" />
-    <Compile Include="Protobufs\Config.cs" />
-    <Compile Include="Protobufs\Data.cs" />
-    <Compile Include="Protobufs\DeviceMetadata.cs" />
-    <Compile Include="Protobufs\DeviceMetrics.cs" />
-    <Compile Include="Protobufs\DeviceUIConfig.cs" />
-    <Compile Include="Protobufs\FromRadio.cs" />
-    <Compile Include="Protobufs\Heartbeat.cs" />
-    <Compile Include="Protobufs\LogRecord.cs" />
-    <Compile Include="Protobufs\MeshPacket.cs" />
-    <Compile Include="Protobufs\ModuleConfig.cs" />
-    <Compile Include="Protobufs\MyNodeInfo.cs" />
-    <Compile Include="Protobufs\NodeInfo.cs" />
-    <Compile Include="Protobufs\Position.cs" />
-    <Compile Include="Protobufs\QueueStatus.cs" />
-    <Compile Include="Protobufs\Telemetry.cs" />
-    <Compile Include="Protobufs\ToRadio.cs" />
-    <Compile Include="Protobufs\User.cs" />
-    <Compile Include="Protobufs\Waypoint.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="lib\protobuf-net.dll" />
+    <ProjectReference Include="..\MeshtasticNETCF\MeshtasticNETCF.csproj">
+      <Project>{8E726375-870F-4006-B51E-90BC7B5A94D9}</Project>
+      <Name>MeshtasticNETCF</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
   <ProjectExtensions>

@@ -8,8 +8,27 @@ using System.IO;
 
 namespace MeshtasticNETCF
 {
-    public class MeshtasticConnection
+    public abstract class MeshtasticConnection
     {
+
+        public class PacketEventArgs : EventArgs
+        {
+            public FromRadio Packet;
+
+            public PacketEventArgs(FromRadio _packet)
+            {
+                Packet = _packet;
+            }
+        }
+
+        protected bool PacketReceived(FromRadio fromRadio, DeviceStateContainer DeviceStateContainer)
+        {
+            OnPacketReceived.Invoke(this, new PacketEventArgs(fromRadio));
+            return true;
+        }
+
+        public event EventHandler<PacketEventArgs> OnPacketReceived;
+
         public const int DEFAULT_BAUD_RATE = 115200;
         public const int DEFAULT_READ_TIMEOUT = 15000;
         public const int MAX_TO_FROM_RADIO_LENGTH = 512;
@@ -46,6 +65,8 @@ namespace MeshtasticNETCF
         protected List<byte> Buffer { get; set; }
         protected int PacketLength { get; set; }
         public readonly DeviceStateContainer DeviceStateContainer = new DeviceStateContainer();
+
+        public event EventHandler OnConnected, OnDisconnected;
 
         public MeshtasticConnection()
         {
@@ -112,6 +133,26 @@ namespace MeshtasticNETCF
 
         public void WriteToRadio(ToRadio toRadio)
         {
+            //DeviceStateContainer.AddToRadio(packet);
+            using (var stream = new MemoryStream())
+            {
+                Serializer.Serialize(stream, toRadio);
+                WriteToSerial(CreatePacket(stream.ToArray()));
+            }
+        }
+
+        protected abstract void WriteToSerial(byte[] bytes);
+
+        public virtual void Open()
+        {
+            if(OnConnected!= null)
+            OnConnected.Invoke(this,null);
+        }
+
+        public virtual void Close()
+        {
+            if (OnDisconnected != null)
+            OnDisconnected.Invoke(this, null);
         }
     }
 }
